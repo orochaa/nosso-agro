@@ -1,7 +1,8 @@
+import { FarmControllerModule } from '#main/modules/controllers/farm-controller.module.js'
 import { ProducerControllerModule } from '#main/modules/controllers/producer-controller.module.js'
 import { Module } from '@nestjs/common'
 
 @Module({
-  imports: [ProducerControllerModule],
+  imports: [ProducerControllerModule, FarmControllerModule],
 })
 export class HttpModule {}
