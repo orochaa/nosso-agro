@@ -1,0 +1,5 @@
+{
+  "material-icon-theme.activeIconPack": "nest",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "js"
+}

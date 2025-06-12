@@ -1,0 +1,38 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=nosso-agro
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_HOST_AUTH=trust
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d postgres"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+
+  app:
+    container_name: app
+    build: 
+      context: .
+      target: development
+    environment:
+      - DB_URL=postgresql://admin:admin@postgres:5432/nosso-agro?schema=public
+      - PORT=3000
+      - EMAIL_FROM=no-reply@company.com
+    ports:
+      - 3000:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: bash -c "pnpm prisma generate && pnpm prisma migrate deploy && pnpm dev"
+
+volumes:
+  postgres_data:

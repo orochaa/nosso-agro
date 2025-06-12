@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model Producer {
+  id        String    @id
+  firstName  String
+  lastName  String
+  email     String    @unique
+  password  String
+  document  String
+  createdAt DateTime
+  updatedAt DateTime
+  deletedAt DateTime?
+
+  farms Farm[]
+}
+
+model Farm {
+  id             String    @id
+  name           String
+  city           String
+  state          String
+  totalArea      Int
+  arableArea     Int
+  vegetationArea Int
+  createdAt      DateTime
+  updatedAt      DateTime
+  deletedAt      DateTime?
+
+  producerId String
+  producer   Producer @relation(fields: [producerId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+
+  safras Safra[]
+}
+
+model Safra {
+  id        String    @id
+  name      String
+  createdAt DateTime
+  updatedAt DateTime
+  deletedAt DateTime?
+
+  farmId String
+  farm   Farm   @relation(fields: [farmId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+
+  plantations Plantation[]
+}
+
+model Plantation {
+  id        String    @id
+  name      String
+  area      Float
+  createdAt DateTime
+  updatedAt DateTime
+  deletedAt DateTime?
+
+  safraId String
+  safra   Safra  @relation(fields: [safraId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+}

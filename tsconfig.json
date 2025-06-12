@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    /* Build */
+    "outDir": "dist",
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "lib": ["es2022"],
+
+    /* Strictness */
+    "strict": true,
+    "verbatimModuleSyntax": false,
+    "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": false,
+    "strictPropertyInitialization": false,
+    "noUncheckedIndexedAccess": true,
+    "strictBindCallApply": false,
+
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "incremental": true,
+
+    /* Alias */
+    "baseUrl": ".",
+    "paths": {
+      "#tests/*": ["__tests__/*"],
+      "#*": ["src/*"]
+    }
+  }
+}

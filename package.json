@@ -1,0 +1,49 @@
+{
+  "name": "nosso-agro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main/server.ts",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node dist/main/server",
+    "dev": "nest start --watch",
+    "build": "nest build",
+    "lint": "run-s lint:tsc lint:prettier lint:eslint",
+    "lint:tsc": "tsc --noEmit",
+    "lint:prettier": "prettier --write .",
+    "lint:eslint": "eslint --fix \"src/**/*.ts\"",
+    "prisma:dev": "prisma generate && prisma migrate dev",
+    "prisma:prod": "prisma generate && prisma migrate deploy",
+    "prisma:reset": "prisma migrate reset"
+  },
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.828.0",
+    "@brazilian-utils/brazilian-utils": "1.0.0-rc.12",
+    "@nestjs/common": "^11.1.3",
+    "@nestjs/core": "^11.1.3",
+    "@nestjs/platform-express": "^11.1.3",
+    "@nestjs/swagger": "^11.2.0",
+    "@prisma/client": "^6.9.0",
+    "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.7",
+    "@nestjs/schematics": "^11.0.5",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.1",
+    "eslint": "^9.28.0",
+    "eslint-plugin-mist3rbru": "^0.6.7",
+    "npm-run-all2": "^8.0.4",
+    "prettier": "^3.5.3",
+    "prisma": "^6.9.0",
+    "typescript": "^5.8.3"
+  },
+  "imports": {
+    "#*": "./dist/*"
+  }
+}
