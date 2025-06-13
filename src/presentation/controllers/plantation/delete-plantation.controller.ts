@@ -1,6 +1,6 @@
 import { IDeletePlantation } from '#domain/usecases/plantation/delete-plantation.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
-import { Controller, Delete, Param } from '@nestjs/common'
+import { Controller, Delete, Param, ParseUUIDPipe } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 @ApiTags('plantation')
@@ -24,7 +24,7 @@ export class DeletePlantationController {
     description: 'Plantação não encontrada',
     type: HttpExceptionError,
   })
-  async handle(@Param('plantationId') plantationId: string): Promise<void> {
+  async handle(@Param('plantationId', ParseUUIDPipe) plantationId: string): Promise<void> {
     await this.updatePlantationService.delete(plantationId)
   }
 }

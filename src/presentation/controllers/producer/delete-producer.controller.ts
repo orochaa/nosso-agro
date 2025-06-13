@@ -1,6 +1,6 @@
 import { IDeleteProducer } from '#domain/usecases/producer/delete-producer.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
-import { Controller, Delete, Param } from '@nestjs/common'
+import { Controller, Delete, Param, ParseUUIDPipe } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 @ApiTags('producer')
@@ -24,7 +24,9 @@ export class DeleteProducerController {
     description: 'Produtor não encontrado',
     type: HttpExceptionError,
   })
-  async handle(@Param('producerId') producerId: string): Promise<void> {
+  async handle(
+    @Param('producerId', ParseUUIDPipe) producerId: string
+  ): Promise<void> {
     await this.updateProducerService.delete(producerId)
   }
 }

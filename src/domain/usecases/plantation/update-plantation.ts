@@ -8,6 +8,5 @@ export namespace IUpdatePlantation {
   export interface Params {
     plantationId: string
     name: string
-    area: number
   }
 }

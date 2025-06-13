@@ -23,7 +23,7 @@ export class CreateProducer implements ICreateProducer {
     )
 
     if (isDuplicated) {
-      throw new BadRequestException('Usuário já cadastrado')
+      throw new BadRequestException('Produtor já cadastrado')
     }
 
     const rawPassword = Producer.generateRandomPassword(12)

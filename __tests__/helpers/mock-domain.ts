@@ -93,7 +93,7 @@ export const mockProperty = createMockEntity(Property, () => ({
 export const mockSafra = createMockEntity(Safra, () => ({
   id: '704c84f2-1111-4587-9abc-b03b30f32d87',
   propertyId: '704c84f2-1111-4587-9abc-b03b30f32d87',
-  name: 'Fazenda Feliz',
+  name: '2021',
   createdAt: new Date(),
   updatedAt: new Date(),
 }))
@@ -101,7 +101,7 @@ export const mockSafra = createMockEntity(Safra, () => ({
 export const mockPlantation = createMockEntity(Plantation, () => ({
   id: '704c84f2-1111-4587-9abc-b03b30f32d87',
   safraId: '704c84f2-1111-4587-9abc-b03b30f32d87',
-  name: 'Fazenda Feliz',
+  name: 'Soja',
   createdAt: new Date(),
   updatedAt: new Date(),
 }))

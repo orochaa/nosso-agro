@@ -11,7 +11,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
-import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator'
+import { IsNotEmpty, IsUUID } from 'class-validator'
 
 export class CreatePlantationBodyDto {
   @ApiProperty()
@@ -22,11 +22,6 @@ export class CreatePlantationBodyDto {
   @ApiProperty()
   @IsNotEmpty({ message: 'Campo obrigatório' })
   name: string
-
-  @ApiProperty()
-  @Min(1, { message: 'Área deve ser maior que 0' })
-  @IsNumber()
-  area: number
 }
 
 @ApiTags('plantation')

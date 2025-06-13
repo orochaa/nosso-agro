@@ -7,7 +7,7 @@ describe('Safra', () => {
     const validParams: Safra.Params = {
       id: '704c84f2-1111-4587-9abc-b03b30f32d87',
       propertyId: '704c84f2-1111-4587-9abc-b03b30f32d87',
-      name: 'Soja',
+      name: '2021',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
@@ -46,7 +46,7 @@ describe('Safra', () => {
     it('should create a safra with valid params', () => {
       const params: Safra.CreateParams = {
         propertyId: '704c84f2-1111-4587-9abc-b03b30f32d87',
-        name: 'Soja',
+        name: '2021',
       }
       const safra = Safra.create(params)
 

@@ -8,6 +8,5 @@ export namespace ICreatePlantation {
   export interface Params {
     safraId: string
     name: string
-    area: number
   }
 }

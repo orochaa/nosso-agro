@@ -33,17 +33,17 @@ export class CreatePropertyBodyDto {
 
   @ApiProperty()
   @Min(0, { message: 'Deve ser maior que 0' })
-  @IsNumber()
+  @IsNumber({}, { message: 'Campo obrigatório' })
   totalArea: number
 
   @ApiProperty()
   @Min(0, { message: 'Deve ser maior que 0' })
-  @IsNumber()
+  @IsNumber({}, { message: 'Campo obrigatório' })
   arableArea: number
 
   @ApiProperty()
   @Min(0, { message: 'Deve ser maior que 0' })
-  @IsNumber()
+  @IsNumber({}, { message: 'Campo obrigatório' })
   vegetationArea: number
 }
 

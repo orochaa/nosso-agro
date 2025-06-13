@@ -1,6 +1,6 @@
 import { IDeleteSafra } from '#domain/usecases/safra/delete-safra.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
-import { Controller, Delete, Param } from '@nestjs/common'
+import { Controller, Delete, Param, ParseUUIDPipe } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 @ApiTags('safra')
@@ -24,7 +24,7 @@ export class DeleteSafraController {
     description: 'Safra não encontrada',
     type: HttpExceptionError,
   })
-  async handle(@Param('safraId') safraId: string): Promise<void> {
+  async handle(@Param('safraId', ParseUUIDPipe) safraId: string): Promise<void> {
     await this.updateSafraService.delete(safraId)
   }
 }

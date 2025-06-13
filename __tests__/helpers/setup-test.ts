@@ -1,15 +1,15 @@
-import { Plantation } from '#domain/entities/plantation'
-import { Producer } from '#domain/entities/producer'
-import { Property } from '#domain/entities/property'
-import { Safra } from '#domain/entities/safra'
-import { PlantationMapper } from '#infra/database/postgres/mappers/plantation.mapper'
-import { ProducerMapper } from '#infra/database/postgres/mappers/producer.mapper'
-import { PropertyMapper } from '#infra/database/postgres/mappers/property.mapper'
-import { SafraMapper } from '#infra/database/postgres/mappers/safra.mapper'
-import { PrismaService } from '#infra/database/postgres/prisma.service'
-import { HttpExceptionsFilter } from '#main/http-exceptions.filter'
-import { AppModule } from '#main/modules/app.module'
-import { ValidationPipe } from '@nestjs/common'
+import { Plantation } from '#domain/entities/plantation.js'
+import { Producer } from '#domain/entities/producer.js'
+import { Property } from '#domain/entities/property.js'
+import { Safra } from '#domain/entities/safra.js'
+import { PlantationMapper } from '#infra/database/postgres/mappers/plantation.mapper.js'
+import { ProducerMapper } from '#infra/database/postgres/mappers/producer.mapper.js'
+import { PropertyMapper } from '#infra/database/postgres/mappers/property.mapper.js'
+import { SafraMapper } from '#infra/database/postgres/mappers/safra.mapper.js'
+import { PrismaService } from '#infra/database/postgres/prisma.service.js'
+import { HttpExceptionsFilter } from '#main/http-exceptions.filter.js'
+import { AppModule } from '#main/modules/app.module.js'
+import { ValidationPipe } from '#main/validation.pipe.js'
 import type { INestApplication } from '@nestjs/common'
 import { HttpAdapterHost } from '@nestjs/core'
 import { Test } from '@nestjs/testing'
@@ -46,13 +46,7 @@ export async function setupIntegrationTest(): Promise<IntegrationTestSut> {
 
   const { httpAdapter } = app.get(HttpAdapterHost)
   app.useGlobalFilters(new HttpExceptionsFilter(httpAdapter))
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      always: true,
-      stopAtFirstError: true,
-    })
-  )
+  app.useGlobalPipes(new ValidationPipe())
 
   await app.init()
 

@@ -1,6 +1,6 @@
 import { IDeleteProperty } from '#domain/usecases/property/delete-property.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
-import { Controller, Delete, Param } from '@nestjs/common'
+import { Controller, Delete, Param, ParseUUIDPipe } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 @ApiTags('property')
@@ -24,7 +24,7 @@ export class DeletePropertyController {
     description: 'Propriedade não encontrada',
     type: HttpExceptionError,
   })
-  async handle(@Param('propertyId') propertyId: string): Promise<void> {
+  async handle(@Param('propertyId', ParseUUIDPipe) propertyId: string): Promise<void> {
     await this.updatePropertyService.delete(propertyId)
   }
 }
