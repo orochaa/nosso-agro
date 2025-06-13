@@ -15,7 +15,7 @@ export class CreatePlantation implements ICreatePlantation {
     const safra = await this.findSafraByIdRepository.findById(params.safraId)
 
     if (!safra) {
-      throw new NotFoundException('Safra não encontrado')
+      throw new NotFoundException('Safra não encontrada')
     }
 
     const plantation = Plantation.create({

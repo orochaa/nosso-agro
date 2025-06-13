@@ -20,8 +20,7 @@ describe('DeleteSafraController', () => {
     }).compile()
 
     controller = module.get<DeleteSafraController>(DeleteSafraController)
-    deleteSafraService =
-      module.get<jest.Mocked<IDeleteSafra>>(IDeleteSafra)
+    deleteSafraService = module.get<jest.Mocked<IDeleteSafra>>(IDeleteSafra)
   })
 
   it('should call service with right params', async () => {

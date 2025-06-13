@@ -24,7 +24,9 @@ export class DeleteSafraController {
     description: 'Safra não encontrada',
     type: HttpExceptionError,
   })
-  async handle(@Param('safraId', ParseUUIDPipe) safraId: string): Promise<void> {
+  async handle(
+    @Param('safraId', ParseUUIDPipe) safraId: string
+  ): Promise<void> {
     await this.updateSafraService.delete(safraId)
   }
 }

@@ -26,7 +26,7 @@ export class PropertyDto {
   @ApiProperty()
   totalArea: number
   @ApiProperty()
-  arableArea: number
+  agriculturalArea: number
   @ApiProperty()
   vegetationArea: number
   @ApiProperty()
@@ -55,7 +55,7 @@ export const PropertyMapper = {
       city: data.city,
       state: data.state,
       totalArea: data.totalArea,
-      arableArea: data.arableArea,
+      agriculturalArea: data.agriculturalArea,
       vegetationArea: data.vegetationArea,
       createdAt: data.createdAt.toISOString(),
       updatedAt: data.updatedAt.toISOString(),

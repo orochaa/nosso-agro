@@ -24,7 +24,7 @@ export class CreateProperty implements ICreateProperty {
       throw new NotFoundException('Produtor não encontrado')
     }
 
-    if (params.totalArea < params.arableArea + params.vegetationArea) {
+    if (params.totalArea < params.agriculturalArea + params.vegetationArea) {
       throw new BadRequestException(
         'A área total não pode ser menor que a soma da área arável e da área de vegetação'
       )
@@ -35,7 +35,7 @@ export class CreateProperty implements ICreateProperty {
       name: params.name,
       city: params.city,
       state: params.state,
-      arableArea: params.arableArea,
+      agriculturalArea: params.agriculturalArea,
       totalArea: params.totalArea,
       vegetationArea: params.vegetationArea,
     })

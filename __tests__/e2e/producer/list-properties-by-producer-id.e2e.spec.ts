@@ -23,7 +23,9 @@ describe('ListPropertiesByProducerId (e2e)', () => {
       mockProperty({ producerId: producer.id })
     )
 
-    const response = await sut.get(`/producers/${producer.id}/properties`).send()
+    const response = await sut
+      .get(`/producers/${producer.id}/properties`)
+      .send()
 
     expect(response.body).toStrictEqual(
       PropertyMapper.mapToSampleDto([property])

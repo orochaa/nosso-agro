@@ -24,7 +24,7 @@ export class UpdateProperty implements IUpdateProperty {
       throw new NotFoundException('Propriedade não encontrada')
     }
 
-    if (params.totalArea < params.arableArea + params.vegetationArea) {
+    if (params.totalArea < params.agriculturalArea + params.vegetationArea) {
       throw new BadRequestException(
         'A área total não pode ser menor que a soma da área arável e da área de vegetação'
       )
@@ -34,7 +34,7 @@ export class UpdateProperty implements IUpdateProperty {
     property.city = params.city
     property.state = params.state
     property.totalArea = params.totalArea
-    property.arableArea = params.arableArea
+    property.agriculturalArea = params.agriculturalArea
     property.vegetationArea = params.vegetationArea
     await this.updatePropertyRepository.update(property)
 

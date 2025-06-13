@@ -13,7 +13,7 @@ describe('Property', () => {
       state: 'SP',
       totalArea: 1000,
       vegetationArea: 500,
-      arableArea: 500,
+      agriculturalArea: 500,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
@@ -27,7 +27,7 @@ describe('Property', () => {
     expect(property.state).toBe(validParams.state)
     expect(property.totalArea).toBe(validParams.totalArea)
     expect(property.vegetationArea).toBe(validParams.vegetationArea)
-    expect(property.arableArea).toBe(validParams.arableArea)
+    expect(property.agriculturalArea).toBe(validParams.agriculturalArea)
     expect(property.createdAt.toISOString()).toBe(validParams.createdAt)
     expect(property.updatedAt.toISOString()).toBe(validParams.updatedAt)
   })
@@ -38,13 +38,19 @@ describe('Property', () => {
     expect(() => mockProperty({ name: '' })).toThrow(BadRequestException)
     expect(() => mockProperty({ city: '' })).toThrow(BadRequestException)
     expect(() => mockProperty({ state: '' })).toThrow(BadRequestException)
-    expect(() => mockProperty({ arableArea: 0 })).toThrow(BadRequestException)
+    expect(() => mockProperty({ agriculturalArea: 0 })).toThrow(
+      BadRequestException
+    )
     expect(() => mockProperty({ vegetationArea: 0 })).toThrow(
       BadRequestException
     )
     expect(() => mockProperty({ totalArea: 0 })).toThrow(BadRequestException)
     expect(() =>
-      mockProperty({ totalArea: 1000, arableArea: 501, vegetationArea: 500 })
+      mockProperty({
+        totalArea: 1000,
+        agriculturalArea: 501,
+        vegetationArea: 500,
+      })
     ).toThrow(BadRequestException)
     expect(() => mockProperty({ createdAt: '' })).toThrow(BadRequestException)
     expect(() => mockProperty({ updatedAt: '' })).toThrow(BadRequestException)
@@ -115,17 +121,17 @@ describe('Property', () => {
     expect(property.totalArea).toBe(2000)
   })
 
-  it('should throw when setting invalid arableArea', () => {
+  it('should throw when setting invalid agriculturalArea', () => {
     const property = mockProperty()
 
-    expect(() => (property.arableArea = 0)).toThrow(BadRequestException)
+    expect(() => (property.agriculturalArea = 0)).toThrow(BadRequestException)
   })
 
-  it('should allow setting valid arableArea', () => {
+  it('should allow setting valid agriculturalArea', () => {
     const property = mockProperty()
-    property.arableArea = 600
+    property.agriculturalArea = 600
 
-    expect(property.arableArea).toBe(600)
+    expect(property.agriculturalArea).toBe(600)
   })
 
   it('should throw when setting invalid vegetationArea', () => {
@@ -150,7 +156,7 @@ describe('Property', () => {
         state: 'SP',
         totalArea: 1000,
         vegetationArea: 500,
-        arableArea: 500,
+        agriculturalArea: 500,
       }
       const property = Property.create(params)
 
@@ -161,7 +167,7 @@ describe('Property', () => {
       expect(property.state).toBe(params.state)
       expect(property.totalArea).toBe(params.totalArea)
       expect(property.vegetationArea).toBe(params.vegetationArea)
-      expect(property.arableArea).toBe(params.arableArea)
+      expect(property.agriculturalArea).toBe(params.agriculturalArea)
       expect(property.createdAt).toBeDefined()
       expect(property.updatedAt).toBeDefined()
     })

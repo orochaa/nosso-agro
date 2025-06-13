@@ -15,7 +15,7 @@ const mockBody = createMockParams<UpdatePropertyBodyDto>(() => ({
   state: 'SP',
   totalArea: 1000,
   vegetationArea: 500,
-  arableArea: 500,
+  agriculturalArea: 500,
 }))
 
 describe('CratePropertyController', () => {
@@ -32,19 +32,19 @@ describe('CratePropertyController', () => {
         state: 'Campo obrigatório',
         totalArea: 'Campo obrigatório',
         vegetationArea: 'Campo obrigatório',
-        arableArea: 'Campo obrigatório',
+        agriculturalArea: 'Campo obrigatório',
       })
     })
 
     it('should pass validation with correct inputs', async () => {
       const body = new UpdatePropertyBodyDto()
-  body.propertyId= '704c84f2-1111-4587-9abc-b03b30f32d87'
-  body.name= 'Fazenda Feliz'
-  body.city= 'São Paulo'
-  body.state= 'SP'
-  body.totalArea= 1000
-  body.vegetationArea= 500
-  body.arableArea= 500
+      body.propertyId = '704c84f2-1111-4587-9abc-b03b30f32d87'
+      body.name = 'Fazenda Feliz'
+      body.city = 'São Paulo'
+      body.state = 'SP'
+      body.totalArea = 1000
+      body.vegetationArea = 500
+      body.agriculturalArea = 500
 
       const errors = await validate(body)
 
@@ -82,13 +82,13 @@ describe('CratePropertyController', () => {
       await controller.handle(body)
 
       expect(updatePropertyService.update).toHaveBeenCalledWith({
-        propertyId:body.propertyId,
-name:body.name,
-city:body.city,
-state:body.state,
-totalArea:body.totalArea,
-vegetationArea:body.vegetationArea,
-arableArea:body.arableArea,
+        propertyId: body.propertyId,
+        name: body.name,
+        city: body.city,
+        state: body.state,
+        totalArea: body.totalArea,
+        vegetationArea: body.vegetationArea,
+        agriculturalArea: body.agriculturalArea,
       })
     })
 

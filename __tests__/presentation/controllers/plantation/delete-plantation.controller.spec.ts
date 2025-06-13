@@ -19,7 +19,9 @@ describe('DeletePlantationController', () => {
       ],
     }).compile()
 
-    controller = module.get<DeletePlantationController>(DeletePlantationController)
+    controller = module.get<DeletePlantationController>(
+      DeletePlantationController
+    )
     deletePlantationService =
       module.get<jest.Mocked<IDeletePlantation>>(IDeletePlantation)
   })

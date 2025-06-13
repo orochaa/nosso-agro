@@ -24,7 +24,9 @@ export class DeletePropertyController {
     description: 'Propriedade não encontrada',
     type: HttpExceptionError,
   })
-  async handle(@Param('propertyId', ParseUUIDPipe) propertyId: string): Promise<void> {
+  async handle(
+    @Param('propertyId', ParseUUIDPipe) propertyId: string
+  ): Promise<void> {
     await this.updatePropertyService.delete(propertyId)
   }
 }

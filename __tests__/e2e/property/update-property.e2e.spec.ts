@@ -14,7 +14,7 @@ const mockBody = createMockParams<UpdatePropertyBodyDto>(() => ({
   state: 'SP',
   totalArea: 1000,
   vegetationArea: 500,
-  arableArea: 500,
+  agriculturalArea: 500,
 }))
 
 describe('UpdateProperty (e2e)', () => {
@@ -37,7 +37,7 @@ describe('UpdateProperty (e2e)', () => {
       statusCode: 400,
       error: 'BadRequest',
       message: {
-        arableArea: 'Campo obrigatório',
+        agriculturalArea: 'Campo obrigatório',
         city: 'Campo obrigatório',
         name: 'Campo obrigatório',
         propertyId: 'Campo obrigatório',

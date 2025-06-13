@@ -27,7 +27,7 @@ model Property {
   city           String
   state          String
   totalArea      Int
-  arableArea     Int
+  agriculturalArea     Int
   vegetationArea Int
   createdAt      DateTime
   updatedAt      DateTime

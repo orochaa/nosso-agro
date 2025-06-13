@@ -11,7 +11,7 @@ export namespace ICreateProperty {
     city: string
     state: string
     totalArea: number
-    arableArea: number
+    agriculturalArea: number
     vegetationArea: number
   }
 }

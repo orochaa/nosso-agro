@@ -15,7 +15,7 @@ const mockBody = createMockParams<CreatePropertyBodyDto>(() => ({
   state: 'SP',
   totalArea: 1000,
   vegetationArea: 500,
-  arableArea: 500,
+  agriculturalArea: 500,
 }))
 
 describe('CratePropertyController', () => {
@@ -32,7 +32,7 @@ describe('CratePropertyController', () => {
         state: 'Campo obrigatório',
         totalArea: 'Campo obrigatório',
         vegetationArea: 'Campo obrigatório',
-        arableArea: 'Campo obrigatório',
+        agriculturalArea: 'Campo obrigatório',
       })
     })
 
@@ -44,7 +44,7 @@ describe('CratePropertyController', () => {
       body.state = 'SP'
       body.totalArea = 1000
       body.vegetationArea = 500
-      body.arableArea = 500
+      body.agriculturalArea = 500
 
       const errors = await validate(body)
 
@@ -88,7 +88,7 @@ describe('CratePropertyController', () => {
         state: body.state,
         totalArea: body.totalArea,
         vegetationArea: body.vegetationArea,
-        arableArea: body.arableArea,
+        agriculturalArea: body.agriculturalArea,
       })
     })
 

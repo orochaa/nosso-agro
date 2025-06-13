@@ -20,7 +20,7 @@ CREATE TABLE "Property" (
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "totalArea" INTEGER NOT NULL,
-    "arableArea" INTEGER NOT NULL,
+    "agriculturalArea" INTEGER NOT NULL,
     "vegetationArea" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,

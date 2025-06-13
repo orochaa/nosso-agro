@@ -28,7 +28,7 @@ describe('CrateSafraController', () => {
 
     it('should pass validation with correct inputs', async () => {
       const body = new CreateSafraBodyDto()
-      body.propertyId = '704c84f2-1111-4587-9abc-b03b30f32d87'      
+      body.propertyId = '704c84f2-1111-4587-9abc-b03b30f32d87'
       body.name = '2022'
 
       const errors = await validate(body)

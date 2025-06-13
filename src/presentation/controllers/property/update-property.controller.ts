@@ -39,7 +39,7 @@ export class UpdatePropertyBodyDto {
   @ApiProperty()
   @Min(1, { message: 'Campo deve ser maior que 0' })
   @IsNumber({}, { message: 'Campo obrigatório' })
-  arableArea: number
+  agriculturalArea: number
 
   @ApiProperty()
   @Min(1, { message: 'Campo deve ser maior que 0' })

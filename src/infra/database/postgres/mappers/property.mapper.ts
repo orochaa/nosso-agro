@@ -10,7 +10,7 @@ export const PropertyMapper = {
       city: data.city,
       state: data.state,
       totalArea: data.totalArea,
-      arableArea: data.arableArea,
+      agriculturalArea: data.agriculturalArea,
       vegetationArea: data.vegetationArea,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,

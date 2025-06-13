@@ -24,7 +24,9 @@ export class DeletePlantationController {
     description: 'Plantação não encontrada',
     type: HttpExceptionError,
   })
-  async handle(@Param('plantationId', ParseUUIDPipe) plantationId: string): Promise<void> {
+  async handle(
+    @Param('plantationId', ParseUUIDPipe) plantationId: string
+  ): Promise<void> {
     await this.updatePlantationService.delete(plantationId)
   }
 }

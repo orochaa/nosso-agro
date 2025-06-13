@@ -14,7 +14,7 @@ export class Property {
       city: params.city,
       state: params.state,
       totalArea: params.totalArea,
-      arableArea: params.arableArea,
+      agriculturalArea: params.agriculturalArea,
       vegetationArea: params.vegetationArea,
       createdAt: new Date(params.createdAt),
       updatedAt: new Date(params.updatedAt),
@@ -46,7 +46,7 @@ export class Property {
       throw new BadRequestException('Campo área total é obrigatório')
     }
 
-    if (!params.arableArea) {
+    if (!params.agriculturalArea) {
       throw new BadRequestException('Campo área arável é obrigatório')
     }
 
@@ -54,7 +54,7 @@ export class Property {
       throw new BadRequestException('Campo área de vegetação é obrigatório')
     }
 
-    if (params.arableArea + params.vegetationArea > params.totalArea) {
+    if (params.agriculturalArea + params.vegetationArea > params.totalArea) {
       throw new BadRequestException(
         'A soma da área arável e da área de vegetação não pode ser maior que a área total'
       )
@@ -134,16 +134,16 @@ export class Property {
     this.update()
   }
 
-  get arableArea(): number {
-    return this.props.arableArea
+  get agriculturalArea(): number {
+    return this.props.agriculturalArea
   }
 
-  set arableArea(arableArea: number) {
-    if (!arableArea) {
+  set agriculturalArea(agriculturalArea: number) {
+    if (!agriculturalArea) {
       throw new BadRequestException('Campo área arável é obrigatório')
     }
 
-    this.props.arableArea = arableArea
+    this.props.agriculturalArea = agriculturalArea
     this.update()
   }
 
@@ -179,7 +179,7 @@ export class Property {
       city: params.city,
       state: params.state,
       totalArea: params.totalArea,
-      arableArea: params.arableArea,
+      agriculturalArea: params.agriculturalArea,
       vegetationArea: params.vegetationArea,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -195,7 +195,7 @@ export namespace Property {
     city: string
     state: string
     totalArea: number
-    arableArea: number
+    agriculturalArea: number
     vegetationArea: number
     createdAt: Date
     updatedAt: Date
@@ -208,7 +208,7 @@ export namespace Property {
     city: string
     state: string
     totalArea: number
-    arableArea: number
+    agriculturalArea: number
     vegetationArea: number
     createdAt: Date | string
     updatedAt: Date | string
@@ -220,7 +220,7 @@ export namespace Property {
     city: string
     state: string
     totalArea: number
-    arableArea: number
+    agriculturalArea: number
     vegetationArea: number
   }
 }

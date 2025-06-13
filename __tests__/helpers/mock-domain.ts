@@ -85,7 +85,7 @@ export const mockProperty = createMockEntity(Property, () => ({
   state: 'SP',
   totalArea: 1000,
   vegetationArea: 500,
-  arableArea: 500,
+  agriculturalArea: 500,
   createdAt: new Date(),
   updatedAt: new Date(),
 }))
