@@ -2,7 +2,7 @@ import {
   ICreatePlantationRepository,
   IDeletePlantationRepository,
   IFindPlantationByIdRepository,
-  IListPlantationsBySafraId,
+  IListPlantationsBySafraIdRepository,
   IUpdatePlantationRepository,
 } from '#services/protocols/database/plantation-repository.js'
 import { PlantationRepository } from '#infra/database/postgres/plantation-repository.service.js'
@@ -22,7 +22,7 @@ import { Module } from '@nestjs/common'
       useExisting: PlantationRepository,
     },
     {
-      provide: IListPlantationsBySafraId,
+      provide: IListPlantationsBySafraIdRepository,
       useExisting: PlantationRepository,
     },
     {
@@ -37,7 +37,7 @@ import { Module } from '@nestjs/common'
   exports: [
     ICreatePlantationRepository,
     IDeletePlantationRepository,
-    IListPlantationsBySafraId,
+    IListPlantationsBySafraIdRepository,
     IUpdatePlantationRepository,
     IFindPlantationByIdRepository,
   ],

@@ -4,7 +4,7 @@ import {
 } from '@nestjs/common'
 import type { ValidationError } from '@nestjs/common'
 
-function mapError(
+export function mapError(
   errorResponse: Record<string, unknown>,
   error: ValidationError
 ): void {

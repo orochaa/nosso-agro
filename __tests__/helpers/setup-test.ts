@@ -9,7 +9,7 @@ import { SafraMapper } from '#infra/database/postgres/mappers/safra.mapper.js'
 import { PrismaService } from '#infra/database/postgres/prisma.service.js'
 import { HttpExceptionsFilter } from '#main/http-exceptions.filter.js'
 import { AppModule } from '#main/modules/app.module.js'
-import { ValidationPipe } from '#main/validation.pipe.js'
+import { ValidationPipe, mapError } from '#main/validation.pipe.js'
 import type { INestApplication } from '@nestjs/common'
 import { HttpAdapterHost } from '@nestjs/core'
 import { Test } from '@nestjs/testing'
@@ -17,18 +17,15 @@ import { validate as validateClass } from 'class-validator'
 import supertest from 'supertest'
 import type http from 'node:http'
 
-export async function validate(obj: object): Promise<string[]> {
+export async function validate(obj: object): Promise<Record<string, unknown>> {
   const errors = await validateClass(obj)
-  const result: string[] = []
+  const errorResponse: Record<string, unknown> = {}
 
   for (const error of errors) {
-    for (const [, value] of Object.entries(error.constraints ?? {})) {
-      result.push(value)
-      break
-    }
+    mapError(errorResponse, error)
   }
 
-  return result
+  return errorResponse
 }
 
 export interface IntegrationTestSut extends supertest.Agent {

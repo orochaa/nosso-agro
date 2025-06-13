@@ -2,7 +2,7 @@ import type { Plantation } from '#domain/entities/plantation.js'
 import type {
   ICreatePlantationRepository,
   IDeletePlantationRepository,
-  IListPlantationsBySafraId,
+  IListPlantationsBySafraIdRepository,
   IUpdatePlantationRepository,
 } from '#services/protocols/database/plantation-repository.js'
 import { PlantationMapper } from '#infra/database/postgres/mappers/plantation.mapper.js'
@@ -12,7 +12,7 @@ import { Injectable } from '@nestjs/common'
 interface IPlantationRepository
   extends ICreatePlantationRepository,
     IDeletePlantationRepository,
-    IListPlantationsBySafraId,
+    IListPlantationsBySafraIdRepository,
     IUpdatePlantationRepository {}
 
 @Injectable()
