@@ -8,9 +8,9 @@ import { DeleteFarmController } from '#presentation/controllers/farm/delete-farm
 import { FindFarmByIdController } from '#presentation/controllers/farm/find-farm-by-id.controller.js'
 import { ListSafrasByFarmIdController } from '#presentation/controllers/farm/list-safras-by-farm-id.controller.js'
 import { UpdateFarmController } from '#presentation/controllers/farm/update-farm.controller.js'
-import { IDeleteFarmRepository } from '#services/protocols/database/farm-repository.js'
 import { IListSafrasByFarmIdRepository } from '#services/protocols/database/safra-repository.js'
 import { CreateFarm } from '#services/usecases/farm/create-farm.service.js'
+import { DeleteFarm } from '#services/usecases/farm/delete-farm.service.js'
 import { FindFarmById } from '#services/usecases/farm/find-farm-by-id.service.js'
 import { UpdateFarm } from '#services/usecases/farm/update-farm.service.js'
 import { FarmRepositoryModule } from '#main/modules/repositories/farm-repository.module.js'
@@ -46,7 +46,7 @@ import { Module } from '@nestjs/common'
     },
     {
       provide: IDeleteFarm,
-      useExisting: IDeleteFarmRepository,
+      useClass: DeleteFarm,
     },
     {
       provide: IListSafrasByFarmId,

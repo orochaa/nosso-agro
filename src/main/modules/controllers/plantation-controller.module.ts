@@ -4,12 +4,12 @@ import { IUpdatePlantation } from '#domain/usecases/plantation/update-plantation
 import { CreatePlantationController } from '#presentation/controllers/plantation/create-plantation.controller.js'
 import { DeletePlantationController } from '#presentation/controllers/plantation/delete-plantation.controller.js'
 import { UpdatePlantationController } from '#presentation/controllers/plantation/update-plantation.controller.js'
-import { IDeletePlantationRepository } from '#services/protocols/database/plantation-repository.js'
 import { CreatePlantation } from '#services/usecases/plantation/create-plantation.service.js'
+import { DeletePlantation } from '#services/usecases/plantation/delete-plantation.service.js'
 import { UpdatePlantation } from '#services/usecases/plantation/update-plantation.service.js'
 import { PlantationRepositoryModule } from '#main/modules/repositories/plantation-repository.module.js'
-import { Module } from '@nestjs/common'
 import { SafraRepositoryModule } from '#main/modules/repositories/safra-repository.module.js'
+import { Module } from '@nestjs/common'
 
 @Module({
   imports: [PlantationRepositoryModule, SafraRepositoryModule],
@@ -29,7 +29,7 @@ import { SafraRepositoryModule } from '#main/modules/repositories/safra-reposito
     },
     {
       provide: IDeletePlantation,
-      useExisting: IDeletePlantationRepository,
+      useClass: DeletePlantation,
     },
   ],
 })

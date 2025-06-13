@@ -12,11 +12,9 @@ import { ListProducersController } from '#presentation/controllers/producer/list
 import { UpdateProducerController } from '#presentation/controllers/producer/update-producer.controller.js'
 import { IHashGenerator } from '#services/protocols/data/hasher.js'
 import { IListFarmsByProducerIdRepository } from '#services/protocols/database/farm-repository.js'
-import {
-  IDeleteProducerRepository,
-  IListProducersRepository,
-} from '#services/protocols/database/producer-repository.js'
+import { IListProducersRepository } from '#services/protocols/database/producer-repository.js'
 import { CreateProducer } from '#services/usecases/producer/create-producer.service.js'
+import { DeleteProducer } from '#services/usecases/producer/delete-producer.service.js'
 import { FindProducerById } from '#services/usecases/producer/find-producer-by-id.service.js'
 import { UpdateProducer } from '#services/usecases/producer/update-producer.service.js'
 import { HashAdapter } from '#infra/adapters/hash.adapter.js'
@@ -54,7 +52,7 @@ import { Module } from '@nestjs/common'
     },
     {
       provide: IDeleteProducer,
-      useExisting: IDeleteProducerRepository,
+      useClass: DeleteProducer,
     },
     {
       provide: IListProducers,

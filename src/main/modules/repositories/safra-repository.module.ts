@@ -40,6 +40,7 @@ import { Module } from '@nestjs/common'
     IListSafrasByFarmIdRepository,
     IFindSafraByIdRepository,
     IUpdateSafraRepository,
+    IFindSafraByIdRepository,
   ],
 })
 export class SafraRepositoryModule {}

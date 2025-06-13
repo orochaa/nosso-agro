@@ -6,12 +6,12 @@ import { CreateSafraController } from '#presentation/controllers/safra/create-sa
 import { DeleteSafraController } from '#presentation/controllers/safra/delete-safra.controller.js'
 import { FindSafraByIdController } from '#presentation/controllers/safra/find-safra-by-id.controller.js'
 import { UpdateSafraController } from '#presentation/controllers/safra/update-safra.controller.js'
-import { IDeleteSafraRepository } from '#services/protocols/database/safra-repository.js'
 import { CreateSafra } from '#services/usecases/safra/create-safra.service.js'
+import { DeleteSafra } from '#services/usecases/safra/delete-safra.service.js'
 import { FindSafraById } from '#services/usecases/safra/find-safra-by-id.service.js'
 import { UpdateSafra } from '#services/usecases/safra/update-safra.service.js'
-import { SafraRepositoryModule } from '#main/modules/repositories/safra-repository.module.js'
 import { FarmRepositoryModule } from '#main/modules/repositories/farm-repository.module.js'
+import { SafraRepositoryModule } from '#main/modules/repositories/safra-repository.module.js'
 import { Module } from '@nestjs/common'
 
 @Module({
@@ -37,7 +37,7 @@ import { Module } from '@nestjs/common'
     },
     {
       provide: IDeleteSafra,
-      useExisting: IDeleteSafraRepository,
+      useClass: DeleteSafra,
     },
   ],
 })
