@@ -55,7 +55,6 @@ model Safra {
 model Plantation {
   id        String    @id
   name      String
-  area      Float
   createdAt DateTime
   updatedAt DateTime
   deletedAt DateTime?
