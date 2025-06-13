@@ -3,9 +3,9 @@ import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
 import { SafraDto, SafraMapper } from '#presentation/mappers/safra.mapper.js'
 import { Body, Controller, Post } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsUUID } from 'class-validator'
@@ -27,8 +27,22 @@ export class CreateSafraController {
   constructor(readonly createSafraService: ICreateSafra) {}
 
   @Post('/safra')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiCreatedResponse({ type: SafraDto })
+  @ApiOperation({ summary: 'Criar nova safra' })
+  @ApiResponse({
+    status: 201,
+    description: 'Safra criada com sucesso',
+    type: SafraDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Produtor não encontrado',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: CreateSafraBodyDto): Promise<SafraDto> {
     const safra = await this.createSafraService.create(body)
 

@@ -3,9 +3,9 @@ import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
 import { FarmDto, FarmMapper } from '#presentation/mappers/farm.mapper.js'
 import { Body, Controller, Put } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiOkResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator'
@@ -50,8 +50,22 @@ export class UpdateFarmController {
   constructor(readonly updateFarmService: IUpdateFarm) {}
 
   @Put('/farm')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiOkResponse({ type: FarmDto })
+  @ApiOperation({ summary: 'Atualizar fazenda' })
+  @ApiResponse({
+    status: 200,
+    description: 'Fazenda atualizada com sucesso',
+    type: FarmDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Fazenda não encontrada',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: UpdateFarmBodyDto): Promise<FarmDto> {
     const farm = await this.updateFarmService.update(body)
 

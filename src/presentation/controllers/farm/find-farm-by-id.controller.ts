@@ -1,9 +1,6 @@
 import { IFindFarmById } from '#domain/usecases/farm/find-farm-by-id.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
-import {
-  FarmDto,
-  FarmMapper,
-} from '#presentation/mappers/farm.mapper.js'
+import { FarmDto, FarmMapper } from '#presentation/mappers/farm.mapper.js'
 import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common'
 import {
   ApiBadRequestResponse,

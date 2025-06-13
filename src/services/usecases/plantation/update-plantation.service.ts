@@ -2,7 +2,7 @@ import { Plantation } from '#domain/entities/plantation.js'
 import { IUpdatePlantation } from '#domain/usecases/plantation/update-plantation.js'
 import { IUpdatePlantationRepository } from '#services/protocols/database/plantation-repository.js'
 import { IFindPlantationByIdRepository } from '#services/protocols/database/plantation-repository.js'
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 
 @Injectable()
 export class UpdatePlantation implements IUpdatePlantation {
@@ -17,7 +17,7 @@ export class UpdatePlantation implements IUpdatePlantation {
     )
 
     if (!plantation) {
-      throw new BadRequestException('Plantação não encontrada')
+      throw new NotFoundException('Plantação não encontrada')
     }
 
     plantation.name = params.name

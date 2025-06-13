@@ -2,7 +2,11 @@ import { Farm } from '#domain/entities/farm.js'
 import { IUpdateFarm } from '#domain/usecases/farm/update-farm.js'
 import { IUpdateFarmRepository } from '#services/protocols/database/farm-repository.js'
 import { IFindFarmByIdRepository } from '#services/protocols/database/farm-repository.js'
-import { BadRequestException, Injectable } from '@nestjs/common'
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 
 @Injectable()
 export class UpdateFarm implements IUpdateFarm {
@@ -15,7 +19,7 @@ export class UpdateFarm implements IUpdateFarm {
     const farm = await this.findFarmByIdRepository.findById(params.farmId)
 
     if (!farm) {
-      throw new BadRequestException('Fazenda não encontrada')
+      throw new NotFoundException('Fazenda não encontrada')
     }
 
     if (params.totalArea < params.arableArea + params.vegetationArea) {

@@ -2,7 +2,7 @@ import { Safra } from '#domain/entities/safra.js'
 import { ICreateSafra } from '#domain/usecases/safra/create-safra.js'
 import { IFindFarmByIdRepository } from '#services/protocols/database/farm-repository.js'
 import { ICreateSafraRepository } from '#services/protocols/database/safra-repository.js'
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 
 @Injectable()
 export class CreateSafra implements ICreateSafra {
@@ -15,7 +15,7 @@ export class CreateSafra implements ICreateSafra {
     const farm = await this.findFarmByIdRepository.findById(params.farmId)
 
     if (!farm) {
-      throw new BadRequestException('Fazenda não encontrada')
+      throw new NotFoundException('Fazenda não encontrada')
     }
 
     const safra = Safra.create({

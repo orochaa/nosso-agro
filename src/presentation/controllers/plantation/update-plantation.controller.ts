@@ -6,9 +6,9 @@ import {
 } from '#presentation/mappers/plantation.mapper.js'
 import { Body, Controller, Put } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiOkResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator'
@@ -35,8 +35,22 @@ export class UpdatePlantationController {
   constructor(readonly updatePlantationService: IUpdatePlantation) {}
 
   @Put('/plantation')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiOkResponse({ type: PlantationDto })
+  @ApiOperation({ summary: 'Atualizar Plantação' })
+  @ApiResponse({
+    status: 200,
+    description: 'Plantação atualizada com sucesso',
+    type: PlantationDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Plantação não encontrada',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: UpdatePlantationBodyDto): Promise<PlantationDto> {
     const plantation = await this.updatePlantationService.update(body)
 

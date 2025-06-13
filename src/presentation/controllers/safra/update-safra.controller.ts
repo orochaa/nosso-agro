@@ -3,9 +3,9 @@ import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
 import { SafraDto, SafraMapper } from '#presentation/mappers/safra.mapper.js'
 import { Body, Controller, Put } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiOkResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsUUID } from 'class-validator'
@@ -27,8 +27,22 @@ export class UpdateSafraController {
   constructor(readonly updateSafraService: IUpdateSafra) {}
 
   @Put('/safra')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiOkResponse({ type: SafraDto })
+  @ApiOperation({ summary: 'Atualizar safra' })
+  @ApiResponse({
+    status: 200,
+    description: 'Safra atualizada com sucesso',
+    type: SafraDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Safra não encontrada',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: UpdateSafraBodyDto): Promise<SafraDto> {
     const safra = await this.updateSafraService.update(body)
 

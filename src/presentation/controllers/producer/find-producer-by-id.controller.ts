@@ -5,12 +5,7 @@ import {
   ProducerMapper,
 } from '#presentation/mappers/producer.mapper.js'
 import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common'
-import {
-  ApiBadRequestResponse,
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 @ApiTags('producer')
 @Controller()
@@ -18,9 +13,17 @@ export class FindProducerByIdController {
   constructor(readonly findProducerById: IFindProducerById) {}
 
   @Get('/producers/:producerId')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiNotFoundResponse({ type: HttpExceptionError })
-  @ApiOkResponse({ type: ProducerDto, isArray: true })
+  @ApiOperation({ summary: 'Buscar produtor por ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Produtor encontrado com sucesso',
+    type: ProducerDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Produtor não encontrado',
+    type: HttpExceptionError,
+  })
   async handle(
     @Param('producerId', ParseUUIDPipe) producerId: string
   ): Promise<ProducerDto> {

@@ -6,9 +6,9 @@ import {
 } from '#presentation/mappers/producer.mapper.js'
 import { Body, Controller, Put } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiOkResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsEmail, IsNotEmpty, IsUUID } from 'class-validator'
@@ -43,8 +43,22 @@ export class UpdateProducerController {
   constructor(readonly updateProducerService: IUpdateProducer) {}
 
   @Put('/producer')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiOkResponse({ type: ProducerDto })
+  @ApiOperation({ summary: 'Atualizar produtor' })
+  @ApiResponse({
+    status: 200,
+    description: 'Produtor atualizado com sucesso',
+    type: ProducerDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Produtor não encontrado',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: UpdateProducerBodyDto): Promise<ProducerDto> {
     const producer = await this.updateProducerService.update(body)
 

@@ -5,7 +5,11 @@ import {
   IFindProducerByIdRepository,
   IUpdateProducerRepository,
 } from '#services/protocols/database/producer-repository.js'
-import { BadRequestException, Injectable } from '@nestjs/common'
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 
 @Injectable()
 export class UpdateProducer implements IUpdateProducer {
@@ -21,7 +25,7 @@ export class UpdateProducer implements IUpdateProducer {
     )
 
     if (!producer) {
-      throw new BadRequestException('Produtor não encontrado')
+      throw new NotFoundException('Produtor não encontrado')
     }
 
     if (params.email !== producer.email) {

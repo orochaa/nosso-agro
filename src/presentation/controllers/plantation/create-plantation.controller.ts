@@ -6,9 +6,9 @@ import {
 } from '#presentation/mappers/plantation.mapper.js'
 import { Body, Controller, Post } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator'
@@ -35,8 +35,22 @@ export class CreatePlantationController {
   constructor(readonly createPlantationService: ICreatePlantation) {}
 
   @Post('/plantation')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiCreatedResponse({ type: PlantationDto })
+  @ApiOperation({ summary: 'Criar nova Plantação' })
+  @ApiResponse({
+    status: 201,
+    description: 'Plantação criada com sucesso',
+    type: PlantationDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Safra não encontrada',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: CreatePlantationBodyDto): Promise<PlantationDto> {
     const plantation = await this.createPlantationService.create(body)
 

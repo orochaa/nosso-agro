@@ -2,7 +2,7 @@ import { Plantation } from '#domain/entities/plantation.js'
 import { ICreatePlantation } from '#domain/usecases/plantation/create-plantation.js'
 import { ICreatePlantationRepository } from '#services/protocols/database/plantation-repository.js'
 import { IFindSafraByIdRepository } from '#services/protocols/database/safra-repository.js'
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 
 @Injectable()
 export class CreatePlantation implements ICreatePlantation {
@@ -15,7 +15,7 @@ export class CreatePlantation implements ICreatePlantation {
     const safra = await this.findSafraByIdRepository.findById(params.safraId)
 
     if (!safra) {
-      throw new BadRequestException('Safra não encontrado')
+      throw new NotFoundException('Safra não encontrado')
     }
 
     const plantation = Plantation.create({

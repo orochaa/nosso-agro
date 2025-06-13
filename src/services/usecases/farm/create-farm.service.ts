@@ -2,7 +2,11 @@ import { Farm } from '#domain/entities/farm.js'
 import { ICreateFarm } from '#domain/usecases/farm/create-farm.js'
 import { ICreateFarmRepository } from '#services/protocols/database/farm-repository.js'
 import { IFindProducerByIdRepository } from '#services/protocols/database/producer-repository.js'
-import { BadRequestException, Injectable } from '@nestjs/common'
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 
 @Injectable()
 export class CreateFarm implements ICreateFarm {
@@ -17,7 +21,7 @@ export class CreateFarm implements ICreateFarm {
     )
 
     if (!producer) {
-      throw new BadRequestException('Produtor não encontrado')
+      throw new NotFoundException('Produtor não encontrado')
     }
 
     if (params.totalArea < params.arableArea + params.vegetationArea) {

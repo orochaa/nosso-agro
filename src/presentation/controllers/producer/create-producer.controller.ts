@@ -6,9 +6,9 @@ import {
 } from '#presentation/mappers/producer.mapper.js'
 import { Body, Controller, Post } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsEmail, IsNotEmpty } from 'class-validator'
@@ -38,8 +38,17 @@ export class CreateProducerController {
   constructor(readonly createProducerService: ICreateProducer) {}
 
   @Post('/producer')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiCreatedResponse({ type: ProducerDto })
+  @ApiOperation({ summary: 'Criar novo produtor' })
+  @ApiResponse({
+    status: 201,
+    description: 'Produtor criado com sucesso',
+    type: ProducerDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: CreateProducerBodyDto): Promise<ProducerDto> {
     const producer = await this.createProducerService.create(body)
 

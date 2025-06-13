@@ -3,9 +3,9 @@ import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
 import { FarmDto, FarmMapper } from '#presentation/mappers/farm.mapper.js'
 import { Body, Controller, Post } from '@nestjs/common'
 import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
+  ApiOperation,
   ApiProperty,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator'
@@ -50,8 +50,22 @@ export class CreateFarmController {
   constructor(readonly createFarmService: ICreateFarm) {}
 
   @Post('/farm')
-  @ApiBadRequestResponse({ type: HttpExceptionError })
-  @ApiCreatedResponse({ type: FarmDto })
+  @ApiOperation({ summary: 'Criar nova fazenda' })
+  @ApiResponse({
+    status: 201,
+    description: 'Fazenda criada com sucesso',
+    type: FarmDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: HttpExceptionError,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Produtor não encontrado',
+    type: HttpExceptionError,
+  })
   async handle(@Body() body: CreateFarmBodyDto): Promise<FarmDto> {
     const farm = await this.createFarmService.create(body)
 
