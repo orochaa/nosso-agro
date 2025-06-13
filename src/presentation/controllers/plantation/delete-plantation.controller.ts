@@ -8,7 +8,7 @@ import { ApiBadRequestResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 export class DeletePlantationController {
   constructor(readonly updatePlantationService: IDeletePlantation) {}
 
-  @Delete('/plantation/:plantationId')
+  @Delete('/plantations/:plantationId')
   @ApiBadRequestResponse({ type: HttpExceptionError })
   @ApiOkResponse()
   async handle(@Param('plantationId') plantationId: string): Promise<void> {

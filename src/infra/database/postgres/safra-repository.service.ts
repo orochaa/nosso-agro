@@ -3,7 +3,7 @@ import type {
   ICreateSafraRepository,
   IDeleteSafraRepository,
   IFindSafraByIdRepository,
-  IListSafrasByFarmId,
+  IListSafrasByFarmIdRepository,
   IUpdateSafraRepository,
 } from '#services/protocols/database/safra-repository.js'
 import { SafraMapper } from '#infra/database/postgres/mappers/safra.mapper.js'
@@ -14,7 +14,7 @@ interface ISafraRepository
   extends ICreateSafraRepository,
     IDeleteSafraRepository,
     IFindSafraByIdRepository,
-    IListSafrasByFarmId,
+    IListSafrasByFarmIdRepository,
     IUpdateSafraRepository {}
 
 @Injectable()
