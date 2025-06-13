@@ -5,7 +5,7 @@ export const SafraMapper = {
   toPrisma(data: Safra): PrismaSafra {
     return {
       id: data.id,
-      farmId: data.farmId,
+      propertyId: data.propertyId,
       name: data.name,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,

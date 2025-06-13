@@ -71,7 +71,7 @@ async function bootstrap(): Promise<void> {
           'API para gerenciamento de produtores rurais e suas safras'
         )
         .addTag('producer', 'Endpoints de gerenciamento de produtores')
-        .addTag('farm', 'Endpoints de gerenciamento de fazendas')
+        .addTag('property', 'Endpoints de gerenciamento de propriedades')
         .addTag('safra', 'Endpoints de gerenciamento de safras')
         .addTag('plantation', 'Endpoints de gerenciamento de plantações')
         .setVersion('1.0')

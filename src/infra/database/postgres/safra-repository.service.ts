@@ -3,7 +3,7 @@ import type {
   ICreateSafraRepository,
   IDeleteSafraRepository,
   IFindSafraByIdRepository,
-  IListSafrasByFarmIdRepository,
+  IListSafrasByPropertyIdRepository,
   IUpdateSafraRepository,
 } from '#services/protocols/database/safra-repository.js'
 import { SafraMapper } from '#infra/database/postgres/mappers/safra.mapper.js'
@@ -14,7 +14,7 @@ interface ISafraRepository
   extends ICreateSafraRepository,
     IDeleteSafraRepository,
     IFindSafraByIdRepository,
-    IListSafrasByFarmIdRepository,
+    IListSafrasByPropertyIdRepository,
     IUpdateSafraRepository {}
 
 @Injectable()
@@ -37,10 +37,10 @@ export class SafraRepository implements ISafraRepository {
     return SafraMapper.mapToDomain(data)
   }
 
-  async listByFarmId(dataId: string): Promise<Safra[]> {
+  async listByPropertyId(dataId: string): Promise<Safra[]> {
     const data = await this.db.safra.findMany({
       where: {
-        farmId: dataId,
+        propertyId: dataId,
         deletedAt: null,
       },
     })

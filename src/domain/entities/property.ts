@@ -1,11 +1,11 @@
 import { BadRequestException } from '@nestjs/common'
 import { randomUUID } from 'node:crypto'
 
-export class Farm {
-  private readonly props: Farm.Props
+export class Property {
+  private readonly props: Property.Props
 
-  constructor(params: Farm.Params) {
-    Farm.validateParams(params)
+  constructor(params: Property.Params) {
+    Property.validateParams(params)
 
     this.props = {
       id: params.id,
@@ -21,7 +21,7 @@ export class Farm {
     }
   }
 
-  private static validateParams(params: Farm.Params): void {
+  private static validateParams(params: Property.Params): void {
     if (!params.id) {
       throw new BadRequestException('Campo id é obrigatório')
     }
@@ -171,8 +171,8 @@ export class Farm {
     this.props.updatedAt = new Date()
   }
 
-  static create(params: Farm.CreateParams): Farm {
-    return new Farm({
+  static create(params: Property.CreateParams): Property {
+    return new Property({
       id: randomUUID(),
       producerId: params.producerId,
       name: params.name,
@@ -187,7 +187,7 @@ export class Farm {
   }
 }
 
-export namespace Farm {
+export namespace Property {
   export interface Props {
     id: string
     producerId: string

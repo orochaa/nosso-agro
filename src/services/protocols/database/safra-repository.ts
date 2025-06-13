@@ -16,6 +16,6 @@ export abstract class IDeleteSafraRepository {
   abstract delete(data: Safra): Promise<void>
 }
 
-export abstract class IListSafrasByFarmIdRepository {
-  abstract listByFarmId(dataId: string): Promise<Safra[]>
+export abstract class IListSafrasByPropertyIdRepository {
+  abstract listByPropertyId(dataId: string): Promise<Safra[]>
 }

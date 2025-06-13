@@ -12,8 +12,8 @@ export class DeleteSafra implements IDeleteSafra {
     readonly deleteSafraRepository: IDeleteSafraRepository
   ) {}
 
-  async delete(farmId: string): Promise<void> {
-    const safra = await this.findSafraByIdRepository.findById(farmId)
+  async delete(propertyId: string): Promise<void> {
+    const safra = await this.findSafraByIdRepository.findById(propertyId)
 
     if (!safra) {
       throw new NotFoundException('Safra não encontrada')

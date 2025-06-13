@@ -10,12 +10,12 @@ import { CreateSafra } from '#services/usecases/safra/create-safra.service.js'
 import { DeleteSafra } from '#services/usecases/safra/delete-safra.service.js'
 import { FindSafraById } from '#services/usecases/safra/find-safra-by-id.service.js'
 import { UpdateSafra } from '#services/usecases/safra/update-safra.service.js'
-import { FarmRepositoryModule } from '#main/modules/repositories/farm-repository.module.js'
+import { PropertyRepositoryModule } from '#main/modules/repositories/property-repository.module.js'
 import { SafraRepositoryModule } from '#main/modules/repositories/safra-repository.module.js'
 import { Module } from '@nestjs/common'
 
 @Module({
-  imports: [SafraRepositoryModule, FarmRepositoryModule],
+  imports: [SafraRepositoryModule, PropertyRepositoryModule],
   controllers: [
     CreateSafraController,
     UpdateSafraController,

@@ -12,8 +12,9 @@ export class DeletePlantation implements IDeletePlantation {
     readonly deletePlantationRepository: IDeletePlantationRepository
   ) {}
 
-  async delete(farmId: string): Promise<void> {
-    const plantation = await this.findPlantationByIdRepository.findById(farmId)
+  async delete(propertyId: string): Promise<void> {
+    const plantation =
+      await this.findPlantationByIdRepository.findById(propertyId)
 
     if (!plantation) {
       throw new NotFoundException('Plantação não encontrada')

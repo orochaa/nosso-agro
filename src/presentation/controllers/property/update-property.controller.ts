@@ -1,6 +1,9 @@
-import { IUpdateFarm } from '#domain/usecases/farm/update-farm.js'
+import { IUpdateProperty } from '#domain/usecases/property/update-property.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
-import { FarmDto, FarmMapper } from '#presentation/mappers/farm.mapper.js'
+import {
+  PropertyDto,
+  PropertyMapper,
+} from '#presentation/mappers/property.mapper.js'
 import { Body, Controller, Put } from '@nestjs/common'
 import {
   ApiOperation,
@@ -10,11 +13,11 @@ import {
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator'
 
-export class UpdateFarmBodyDto {
+export class UpdatePropertyBodyDto {
   @ApiProperty()
   @IsUUID()
   @IsNotEmpty({ message: 'Campo obrigatório' })
-  farmId: string
+  propertyId: string
 
   @ApiProperty()
   @IsNotEmpty({ message: 'Campo obrigatório' })
@@ -44,17 +47,17 @@ export class UpdateFarmBodyDto {
   vegetationArea: number
 }
 
-@ApiTags('farm')
+@ApiTags('property')
 @Controller()
-export class UpdateFarmController {
-  constructor(readonly updateFarmService: IUpdateFarm) {}
+export class UpdatePropertyController {
+  constructor(readonly updatePropertyService: IUpdateProperty) {}
 
-  @Put('/farm')
-  @ApiOperation({ summary: 'Atualizar fazenda' })
+  @Put('/property')
+  @ApiOperation({ summary: 'Atualizar propriedade' })
   @ApiResponse({
     status: 200,
-    description: 'Fazenda atualizada com sucesso',
-    type: FarmDto,
+    description: 'Propriedade atualizada com sucesso',
+    type: PropertyDto,
   })
   @ApiResponse({
     status: 400,
@@ -63,12 +66,12 @@ export class UpdateFarmController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Fazenda não encontrada',
+    description: 'Propriedade não encontrada',
     type: HttpExceptionError,
   })
-  async handle(@Body() body: UpdateFarmBodyDto): Promise<FarmDto> {
-    const farm = await this.updateFarmService.update(body)
+  async handle(@Body() body: UpdatePropertyBodyDto): Promise<PropertyDto> {
+    const property = await this.updatePropertyService.update(body)
 
-    return FarmMapper.toDto(farm)
+    return PropertyMapper.toDto(property)
   }
 }

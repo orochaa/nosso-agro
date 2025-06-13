@@ -1,6 +1,9 @@
-import { ICreateFarm } from '#domain/usecases/farm/create-farm.js'
+import { ICreateProperty } from '#domain/usecases/property/create-property.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
-import { FarmDto, FarmMapper } from '#presentation/mappers/farm.mapper.js'
+import {
+  PropertyDto,
+  PropertyMapper,
+} from '#presentation/mappers/property.mapper.js'
 import { Body, Controller, Post } from '@nestjs/common'
 import {
   ApiOperation,
@@ -10,7 +13,7 @@ import {
 } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsUUID, Min } from 'class-validator'
 
-export class CreateFarmBodyDto {
+export class CreatePropertyBodyDto {
   @ApiProperty()
   @IsUUID()
   @IsNotEmpty({ message: 'Campo obrigatório' })
@@ -44,17 +47,17 @@ export class CreateFarmBodyDto {
   vegetationArea: number
 }
 
-@ApiTags('farm')
+@ApiTags('property')
 @Controller()
-export class CreateFarmController {
-  constructor(readonly createFarmService: ICreateFarm) {}
+export class CreatePropertyController {
+  constructor(readonly createPropertyService: ICreateProperty) {}
 
-  @Post('/farm')
-  @ApiOperation({ summary: 'Criar nova fazenda' })
+  @Post('/property')
+  @ApiOperation({ summary: 'Criar nova propriedade' })
   @ApiResponse({
     status: 201,
-    description: 'Fazenda criada com sucesso',
-    type: FarmDto,
+    description: 'Propriedade criada com sucesso',
+    type: PropertyDto,
   })
   @ApiResponse({
     status: 400,
@@ -66,9 +69,9 @@ export class CreateFarmController {
     description: 'Produtor não encontrado',
     type: HttpExceptionError,
   })
-  async handle(@Body() body: CreateFarmBodyDto): Promise<FarmDto> {
-    const farm = await this.createFarmService.create(body)
+  async handle(@Body() body: CreatePropertyBodyDto): Promise<PropertyDto> {
+    const property = await this.createPropertyService.create(body)
 
-    return FarmMapper.toDto(farm)
+    return PropertyMapper.toDto(property)
   }
 }

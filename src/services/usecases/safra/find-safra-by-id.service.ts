@@ -7,8 +7,8 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 export class FindSafraById implements IFindSafraById {
   constructor(readonly findSafraByIdRepository: IFindSafraByIdRepository) {}
 
-  async findById(farmId: string): Promise<Safra> {
-    const safra = await this.findSafraByIdRepository.findById(farmId)
+  async findById(propertyId: string): Promise<Safra> {
+    const safra = await this.findSafraByIdRepository.findById(propertyId)
 
     if (!safra) {
       throw new NotFoundException('Safra não encontrada')

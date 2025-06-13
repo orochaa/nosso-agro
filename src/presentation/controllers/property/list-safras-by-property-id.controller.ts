@@ -1,4 +1,4 @@
-import { IListSafrasByFarmId } from '#domain/usecases/safra/list-safras-by-farm-id.js'
+import { IListSafrasByPropertyId } from '#domain/usecases/safra/list-safras-by-property-id.js'
 import { HttpExceptionError } from '#presentation/mappers/error.mapper.js'
 import {
   SafraMapper,
@@ -7,13 +7,13 @@ import {
 import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
-@ApiTags('farm')
+@ApiTags('property')
 @Controller()
-export class ListSafrasByFarmIdController {
-  constructor(readonly listSafrasByFarmId: IListSafrasByFarmId) {}
+export class ListSafrasByPropertyIdController {
+  constructor(readonly listSafrasByPropertyId: IListSafrasByPropertyId) {}
 
-  @Get('/farms/:farmId/safras')
-  @ApiOperation({ summary: 'Listar safras por fazenda' })
+  @Get('/properties/:propertyId/safras')
+  @ApiOperation({ summary: 'Listar safras por propriedade' })
   @ApiResponse({
     status: 200,
     description: 'Lista de safras',
@@ -25,9 +25,9 @@ export class ListSafrasByFarmIdController {
     type: HttpExceptionError,
   })
   async handle(
-    @Param('farmId', ParseUUIDPipe) farmId: string
+    @Param('propertyId', ParseUUIDPipe) propertyId: string
   ): Promise<SafraSampleDto[]> {
-    const data = await this.listSafrasByFarmId.listByFarmId(farmId)
+    const data = await this.listSafrasByPropertyId.listByPropertyId(propertyId)
 
     return SafraMapper.mapToSampleDto(data)
   }

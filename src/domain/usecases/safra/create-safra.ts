@@ -6,7 +6,7 @@ export abstract class ICreateSafra {
 
 export namespace ICreateSafra {
   export interface Params {
-    farmId: string
+    propertyId: string
     name: string
   }
 }

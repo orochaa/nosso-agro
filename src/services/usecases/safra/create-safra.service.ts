@@ -1,25 +1,27 @@
 import { Safra } from '#domain/entities/safra.js'
 import { ICreateSafra } from '#domain/usecases/safra/create-safra.js'
-import { IFindFarmByIdRepository } from '#services/protocols/database/farm-repository.js'
+import { IFindPropertyByIdRepository } from '#services/protocols/database/property-repository.js'
 import { ICreateSafraRepository } from '#services/protocols/database/safra-repository.js'
 import { Injectable, NotFoundException } from '@nestjs/common'
 
 @Injectable()
 export class CreateSafra implements ICreateSafra {
   constructor(
-    readonly findFarmByIdRepository: IFindFarmByIdRepository,
+    readonly findPropertyByIdRepository: IFindPropertyByIdRepository,
     readonly createSafraRepository: ICreateSafraRepository
   ) {}
 
   async create(params: ICreateSafra.Params): Promise<Safra> {
-    const farm = await this.findFarmByIdRepository.findById(params.farmId)
+    const property = await this.findPropertyByIdRepository.findById(
+      params.propertyId
+    )
 
-    if (!farm) {
-      throw new NotFoundException('Fazenda não encontrada')
+    if (!property) {
+      throw new NotFoundException('Propriedade não encontrada')
     }
 
     const safra = Safra.create({
-      farmId: farm.id,
+      propertyId: property.id,
       name: params.name,
     })
     await this.createSafraRepository.create(safra)

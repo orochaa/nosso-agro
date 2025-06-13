@@ -1,7 +1,7 @@
-import { Farm } from '#domain/entities/farm.js'
-import { ICreateFarm } from '#domain/usecases/farm/create-farm.js'
-import { ICreateFarmRepository } from '#services/protocols/database/farm-repository.js'
+import { Property } from '#domain/entities/property.js'
+import { ICreateProperty } from '#domain/usecases/property/create-property.js'
 import { IFindProducerByIdRepository } from '#services/protocols/database/producer-repository.js'
+import { ICreatePropertyRepository } from '#services/protocols/database/property-repository.js'
 import {
   BadRequestException,
   Injectable,
@@ -9,13 +9,13 @@ import {
 } from '@nestjs/common'
 
 @Injectable()
-export class CreateFarm implements ICreateFarm {
+export class CreateProperty implements ICreateProperty {
   constructor(
     readonly findProducerByIdRepository: IFindProducerByIdRepository,
-    readonly createFarmRepository: ICreateFarmRepository
+    readonly createPropertyRepository: ICreatePropertyRepository
   ) {}
 
-  async create(params: ICreateFarm.Params): Promise<Farm> {
+  async create(params: ICreateProperty.Params): Promise<Property> {
     const producer = await this.findProducerByIdRepository.findById(
       params.producerId
     )
@@ -30,7 +30,7 @@ export class CreateFarm implements ICreateFarm {
       )
     }
 
-    const farm = Farm.create({
+    const property = Property.create({
       producerId: producer.id,
       name: params.name,
       city: params.city,
@@ -39,8 +39,8 @@ export class CreateFarm implements ICreateFarm {
       totalArea: params.totalArea,
       vegetationArea: params.vegetationArea,
     })
-    await this.createFarmRepository.create(farm)
+    await this.createPropertyRepository.create(property)
 
-    return farm
+    return property
   }
 }

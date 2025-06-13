@@ -12,8 +12,8 @@ export class DeleteProducer implements IDeleteProducer {
     readonly deleteProducerRepository: IDeleteProducerRepository
   ) {}
 
-  async delete(farmId: string): Promise<void> {
-    const producer = await this.findProducerByIdRepository.findById(farmId)
+  async delete(propertyId: string): Promise<void> {
+    const producer = await this.findProducerByIdRepository.findById(propertyId)
 
     if (!producer) {
       throw new NotFoundException('Produtor não encontrado')

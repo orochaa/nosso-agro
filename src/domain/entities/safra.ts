@@ -9,7 +9,7 @@ export class Safra {
 
     this.props = {
       id: params.id,
-      farmId: params.farmId,
+      propertyId: params.propertyId,
       name: params.name,
       createdAt: new Date(params.createdAt),
       updatedAt: new Date(params.updatedAt),
@@ -21,8 +21,8 @@ export class Safra {
       throw new BadRequestException('Campo id é obrigatório')
     }
 
-    if (!params.farmId) {
-      throw new BadRequestException('Campo farmId é obrigatório')
+    if (!params.propertyId) {
+      throw new BadRequestException('Campo propertyId é obrigatório')
     }
 
     if (!params.name) {
@@ -42,8 +42,8 @@ export class Safra {
     return this.props.id
   }
 
-  get farmId(): string {
-    return this.props.farmId
+  get propertyId(): string {
+    return this.props.propertyId
   }
 
   get name(): string {
@@ -73,7 +73,7 @@ export class Safra {
   static create(params: Safra.CreateParams): Safra {
     return new Safra({
       id: randomUUID(),
-      farmId: params.farmId,
+      propertyId: params.propertyId,
       name: params.name,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -84,7 +84,7 @@ export class Safra {
 export namespace Safra {
   export interface Props {
     id: string
-    farmId: string
+    propertyId: string
     name: string
     createdAt: Date
     updatedAt: Date
@@ -92,14 +92,14 @@ export namespace Safra {
 
   export interface Params {
     id: string
-    farmId: string
+    propertyId: string
     name: string
     createdAt: Date | string
     updatedAt: Date | string
   }
 
   export interface CreateParams {
-    farmId: string
+    propertyId: string
     name: string
   }
 }

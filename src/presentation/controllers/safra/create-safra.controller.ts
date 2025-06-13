@@ -14,7 +14,7 @@ export class CreateSafraBodyDto {
   @ApiProperty()
   @IsUUID()
   @IsNotEmpty({ message: 'Campo obrigatório' })
-  farmId: string
+  propertyId: string
 
   @ApiProperty()
   @IsNotEmpty({ message: 'Campo obrigatório' })

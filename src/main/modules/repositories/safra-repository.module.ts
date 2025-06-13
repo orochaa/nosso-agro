@@ -2,7 +2,7 @@ import {
   ICreateSafraRepository,
   IDeleteSafraRepository,
   IFindSafraByIdRepository,
-  IListSafrasByFarmIdRepository,
+  IListSafrasByPropertyIdRepository,
   IUpdateSafraRepository,
 } from '#services/protocols/database/safra-repository.js'
 import { SafraRepository } from '#infra/database/postgres/safra-repository.service.js'
@@ -22,7 +22,7 @@ import { Module } from '@nestjs/common'
       useExisting: SafraRepository,
     },
     {
-      provide: IListSafrasByFarmIdRepository,
+      provide: IListSafrasByPropertyIdRepository,
       useExisting: SafraRepository,
     },
     {
@@ -37,7 +37,7 @@ import { Module } from '@nestjs/common'
   exports: [
     ICreateSafraRepository,
     IDeleteSafraRepository,
-    IListSafrasByFarmIdRepository,
+    IListSafrasByPropertyIdRepository,
     IFindSafraByIdRepository,
     IUpdateSafraRepository,
     IFindSafraByIdRepository,
