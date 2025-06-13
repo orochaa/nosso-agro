@@ -1,7 +1,8 @@
+import { HttpExceptionsFilter } from '#main/http-exceptions.filter'
 import { AppModule } from '#main/modules/app.module.js'
 import { BadRequestException, ValidationPipe } from '@nestjs/common'
 import type { ValidationError } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
+import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing, @typescript-eslint/no-magic-numbers
@@ -40,6 +41,9 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule)
 
   app.enableCors()
+
+  const { httpAdapter } = app.get(HttpAdapterHost)
+  app.useGlobalFilters(new HttpExceptionsFilter(httpAdapter))
 
   app.useGlobalPipes(
     new ValidationPipe({

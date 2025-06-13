@@ -32,7 +32,7 @@ export class CreateProducer implements ICreateProducer {
     const user = Producer.create({
       firstName: params.firstName,
       lastName: params.lastName,
-      password: hashPassword,
+      passwordHash: hashPassword,
       email: params.email,
       document: params.document,
     })

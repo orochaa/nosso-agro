@@ -8,7 +8,7 @@ export const ProducerMapper = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
-      password: data.password,
+      passwordHash: data.passwordHash,
       document: data.document,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,

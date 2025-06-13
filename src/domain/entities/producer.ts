@@ -7,7 +7,6 @@ import {
   isValidCPF,
   isValidEmail,
 } from '@brazilian-utils/brazilian-utils'
-import { isStrongPassword } from 'class-validator'
 import { randomUUID } from 'node:crypto'
 
 export class Producer {
@@ -22,7 +21,7 @@ export class Producer {
       lastName: params.lastName,
       email: params.email,
       document: params.document,
-      password: params.password,
+      passwordHash: params.passwordHash,
       createdAt: new Date(params.createdAt),
       updatedAt: new Date(params.updatedAt),
     }
@@ -37,8 +36,14 @@ export class Producer {
       throw new BadRequestException('Campo primeiro nome é obrigatório')
     }
 
+    if (params.firstName.split(' ').length > 1) {
+      throw new BadRequestException(
+        'Campo primeiro nome deve ter apenas uma palavra'
+      )
+    }
+
     if (!params.lastName) {
-      throw new BadRequestException('Campo primeiro nome é obrigatório')
+      throw new BadRequestException('Campo último nome é obrigatório')
     }
 
     if (!params.email) {
@@ -49,16 +54,8 @@ export class Producer {
       throw new BadRequestException('Email inválido')
     }
 
-    if (!params.password) {
+    if (!params.passwordHash) {
       throw new BadRequestException('Campo senha é obrigatório')
-    }
-
-    if (!isStrongPassword(params.password)) {
-      throw new BadRequestException('Senha não é segura o suficiente')
-    }
-
-    if (!params.document) {
-      throw new BadRequestException('Campo documento é obrigatório')
     }
 
     if (!params.document) {
@@ -89,6 +86,12 @@ export class Producer {
   set firstName(firstName: string) {
     if (!firstName) {
       throw new BadRequestException('Campo primeiro nome é obrigatório')
+    }
+
+    if (firstName.split(' ').length > 1) {
+      throw new BadRequestException(
+        'Campo primeiro nome deve ter apenas uma palavra'
+      )
     }
     this.props.firstName = firstName
     this.update()
@@ -126,19 +129,16 @@ export class Producer {
     this.update()
   }
 
-  get password(): string {
-    return this.props.password
+  get passwordHash(): string {
+    return this.props.passwordHash
   }
 
-  set password(password: string) {
-    if (!password) {
+  set passwordHash(passwordHash: string) {
+    if (!passwordHash) {
       throw new BadRequestException('Campo senha é obrigatório')
     }
 
-    if (!isStrongPassword(password)) {
-      throw new BadRequestException('Senha não é segura o suficiente')
-    }
-    this.props.password = password
+    this.props.passwordHash = passwordHash
     this.update()
   }
 
@@ -208,16 +208,16 @@ export class Producer {
       return array.join('')
     }
 
-    let password = ''
+    let passwordHash = ''
 
-    while (password.length < length) {
-      password += pick(specials, 1)
-      password += pick(lowercase, 1)
-      password += pick(uppercase, 1)
-      password += pick(all, 3, 10)
+    while (passwordHash.length < length) {
+      passwordHash += pick(specials, 1)
+      passwordHash += pick(lowercase, 1)
+      passwordHash += pick(uppercase, 1)
+      passwordHash += pick(all, 3, 10)
     }
 
-    return shuffle(password.slice(0, Math.max(0, length)))
+    return shuffle(passwordHash.slice(0, Math.max(0, length)))
   }
 
   static create(params: Producer.CreateParams): Producer {
@@ -227,7 +227,7 @@ export class Producer {
       lastName: params.lastName,
       email: params.email,
       document: params.document,
-      password: params.password,
+      passwordHash: params.passwordHash,
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -240,7 +240,7 @@ export namespace Producer {
     firstName: string
     lastName: string
     email: string
-    password: string
+    passwordHash: string
     document: string
     createdAt: Date
     updatedAt: Date
@@ -251,7 +251,7 @@ export namespace Producer {
     firstName: string
     lastName: string
     email: string
-    password: string
+    passwordHash: string
     document: string
     createdAt: Date | string
     updatedAt: Date | string
@@ -261,7 +261,7 @@ export namespace Producer {
     firstName: string
     lastName: string
     email: string
-    password: string
+    passwordHash: string
     document: string
   }
 }

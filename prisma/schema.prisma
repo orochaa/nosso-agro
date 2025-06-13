@@ -8,15 +8,15 @@ datasource db {
 }
 
 model Producer {
-  id        String    @id
-  firstName String
-  lastName  String
-  email     String    @unique
-  password  String
-  document  String
-  createdAt DateTime
-  updatedAt DateTime
-  deletedAt DateTime?
+  id           String    @id
+  firstName    String
+  lastName     String
+  email        String    @unique
+  passwordHash String
+  document     String
+  createdAt    DateTime
+  updatedAt    DateTime
+  deletedAt    DateTime?
 
   properties Property[]
 }
