@@ -47,7 +47,7 @@ async function bootstrap(): Promise<void> {
     }
     writeFileSync(
       path.resolve(docsFolder, 'openapi-spec.json'),
-      JSON.stringify(document)
+      JSON.stringify(document, null, 2)
     )
   }
 

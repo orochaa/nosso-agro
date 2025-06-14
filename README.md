@@ -161,35 +161,69 @@ nosso-agro/
 - ✅ Tratamento Global de Erros
 - ✅ Pronto para deploy via Docker
 
-## 🔥 Como Executar Localmente
+## 🐳 **Como Executar Localmente com Docker (Recomendado)**
 
 ### Pré-requisitos:
 
-- Docker e Docker Compose instalados na máquina
+- Docker instalado
+- Docker Compose instalado
 
 ### Passos:
 
-- Clone o repositório
-
 ```bash
-git clone https://github.com/orochaa/nosso-agro.git
-
-cd nosso-agro
-```
-
-- Subir a aplicação e o banco
-
-```bash
+# Subir a aplicação e o banco de dados
 docker-compose up --build
 ```
 
-#### A aplicação estará disponível em:
+O Docker cuida de toda a configuração do banco de dados e do ambiente da aplicação automaticamente.
 
-http://localhost:3000
+## 💻 **Como Executar Localmente sem Docker**
 
-#### A documentação Swagger estará disponível:
+### Pré-requisitos:
 
-http://localhost:3000/docs
+- Node.js (v18+)
+- pnpm ([https://pnpm.io/](https://pnpm.io/))
+- Banco de dados PostgreSQL rodando localmente
+
+### Passos:
+
+1 - Configuração do Ambiente
+
+Antes de tudo, crie o arquivo de variáveis de ambiente:
+
+```bash
+cp .env.example .env
+```
+
+Edite o arquivo `.env` se necessário, principalmente a variável `DATABASE_URL` para refletir o ambiente que você está utilizando (local ou Docker).
+
+2 - **Instale as dependências:**
+
+```bash
+pnpm install
+```
+
+3 - **Prepare o banco de dados (migrations + seed):**
+
+```bash
+pnpm prisma:dev
+```
+
+Esse comando executa:
+
+- `prisma generate` (Gera os clientes Prisma)
+- `prisma migrate dev` (Cria e aplica migrations)
+
+3 - **Execute a aplicação:**
+
+```bash
+pnpm dev
+```
+
+### Acesso:
+
+- API: [http://localhost:3000](http://localhost:3000)
+- Documentação Swagger: [http://localhost:3000/api](http://localhost:3000/api)
 
 ## 🧪 Executar Testes
 
@@ -215,17 +249,7 @@ npm run test:ci
 
 Acesse a documentação interativa Swagger: http://localhost:3000/docs
 
-## 🐳 Variáveis de Ambiente (.env)
-
-Exemplo de configuração:
-
-```
-DB_URL='postgresql://user:password@localhost:5432/nosso-agro?schema=public'
-
-PORT='3000'
-
-EMAIL_FROM="no-reply@company.com"
-```
+Acesse a documentação OpenAPI: [openapi-spec.json](./docs/openapi-spec.json)
 
 ## ✍️ Autor
 

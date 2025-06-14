@@ -7,13 +7,13 @@ services:
       - '5432:5432'
     environment:
       - POSTGRES_DB=nosso-agro
-      - POSTGRES_USER=admin
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
       - POSTGRES_HOST_AUTH=trust
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
       interval: 5s
       timeout: 2s
       retries: 20
@@ -24,7 +24,7 @@ services:
       context: .
       target: development
     environment:
-      - DB_URL=postgresql://admin:admin@postgres:5432/nosso-agro?schema=public
+      - DB_URL=postgresql://postgres:admin@postgres:5432/nosso-agro?schema=public
       - PORT=3000
       - EMAIL_FROM=no-reply@company.com
     ports:
