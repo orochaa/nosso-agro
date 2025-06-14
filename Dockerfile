@@ -4,6 +4,7 @@ RUN npm install -g pnpm
 FROM pnpm as modules
 WORKDIR /api
 COPY /package.json ./
+COPY /pnpm* ./
 RUN pnpm install
 
 FROM modules as base
